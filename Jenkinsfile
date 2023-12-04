@@ -6,7 +6,7 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "192.168.1.55:8081"
+        NEXUS_URL = "192.168.1.73:8081"
         NEXUS_REPOSITORY = "maven-nexus-repo"
         NEXUS_CREDENTIAL_ID = "nexus-user-credentials"
     }
@@ -18,12 +18,12 @@ pipeline {
         }
         stage ("Clone repo"){
             steps {
-                sh "git clone https://github.com/MaBouz/exp1-spring.git"
+                sh "git clone https://github.com/Naouresss/ex1-spring.git"
             }
         }
         stage('Build') {
             steps {
-                dir("exp1-spring"){
+                dir("ex1-spring"){
                       sh "mvn clean install"
                   }
             }
@@ -31,7 +31,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
-                    dir("exp1-spring"){
+                    dir("ex1-spring"){
                         sh 'mvn sonar:sonar'
                     }
                 }
